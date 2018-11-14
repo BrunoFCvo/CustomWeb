@@ -1,23 +1,36 @@
-var fileId = window.location.hash.substr(1);
-var file = {};
+let fileId = window.location.hash.substr(1);
+let file = {};
 
-var nameInput = document.getElementById("name-input");
-var saveBtn = document.getElementById("save-btn");
-var editor = ace.edit("editor");
+let enableInput = document.getElementById("enable-input");
+let nameInput = document.getElementById("name-input");
+let saveBtn = document.getElementById("save-btn");
+let editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
 
 File.load(fileId).then(f => {
-	let info = (file = f).info;
+    let info = (file = f).info;
+    enableInput.checked = info.enabled;
 	nameInput.value = info.name;
-	editor.setValue(info.content||"");
+    editor.setValue(info.content||"", -1);
+    
+    enableInput.addEventListener("input", editorSetEdited);
+    nameInput.addEventListener("input", editorSetEdited);
+    editor.session.on("change", editorSetEdited);
 });
 
+function editorSetEdited() {
+    saveBtn.classList.add("edited");
+}
+
 function save() {
-	let info = file.info;
+    let info = file.info;
+    info.enabled = enableInput.checked;
 	info.name = nameInput.value;
 	info.content = editor.getValue();
-	file.save();
+    file.save();
+    
+    saveBtn.classList.remove("edited");
 }
 saveBtn.addEventListener("click", save);
 window.addEventListener("keydown", function(e){

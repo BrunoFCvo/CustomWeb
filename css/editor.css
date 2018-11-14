@@ -15,6 +15,7 @@ body {
     flex-direction: column;
 }
 
+/* header */
 header {
     display: flex;
     align-items: center;
@@ -26,11 +27,26 @@ header {
 
     background-color: var(--top);
 }
-header .check{
-	margin-right:25px;
+
+header .check {
+	margin-right: 10px;
 }
+
+#links-btn {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+#links-btn svg {
+    width: 40px;
+    height: 40px;
+    fill: white;
+}
+
 header input {
     width: 50%;
+    padding: 0 10px;
     background-color: var(--top);
 
     font-family: "Segoe UI", Tahoma, sans-serif;
@@ -42,30 +58,35 @@ header input {
 }
 header input:hover,
 header input:focus {
-    padding: 0 10px;
     background-color: var(--light);
 }
 header input:focus{
 	cursor:auto;
 }
-header button {
-    font-family: "Segoe UI", Tahoma, sans-serif;
-    font-size: 18px;
-    color: black;
-	margin-left:auto;
 
+#save-btn {
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    pointer-events: none;
     cursor: pointer;
 }
-
-h2{
-	margin:0;
-	padding:10px 0px 10px 20px;
-	font-size:25px;
-	color:white;
-	font-weight:400;
+#save-btn.edited {
+    pointer-events: all;
 }
-
-.main {
+#save-btn svg {
+    width: 40px;
+    height: 40px;
+    fill: white;
+    opacity: 0.25;
+    transition: opacity 100ms ease-in-out;
+}
+#save-btn.edited svg {
+    opacity: 1;
+}
+ 
+/* editor */
+main {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -74,6 +95,9 @@ h2{
 #editor {
     flex-grow: 1;
 }
+
+/* liinks popup */
+#links-detail { display: none; }
 
 
 /* better monokai */
@@ -91,5 +115,5 @@ h2{
 }
 
 #editor.ace-monokai .ace_marker-layer .ace_active-line {
-    background-color: var(--top);
+    background-color: rgba(0, 0, 0, 0.2);
 }
