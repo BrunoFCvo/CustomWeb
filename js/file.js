@@ -1,9 +1,9 @@
 function File(id){
 	let _this = this;
 	if(!id) id = File.uuid();
-	let info = {id};
+	let info = {id, enabled:true};
 	
-	this.addInfo = function(i){
+	this.changeInfo = function(i){
 		for(let _i in i){
 			info[_i] = i[_i];
 		}
@@ -103,7 +103,7 @@ File.load = function(id){
 		Storage.load([innerID]).then(result => {
 			if(!result[innerID]) err();
 			let file = new File(id);
-			file.addInfo(result[innerID]);
+			file.changeInfo(result[innerID]);
 			succ(file);
 		});
 	});

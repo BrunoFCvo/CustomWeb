@@ -8,8 +8,7 @@ File.loadAll().then(function(files){
 let newFile = document.getElementById("new-file");
 newFile.addEventListener("click", function(){
 	let f = new File();
-	f.addInfo({
-		enabled: true,
+	f.changeInfo({
 		name: "New File",
 		type: "JS"
 	});
