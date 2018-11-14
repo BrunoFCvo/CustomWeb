@@ -1,7 +1,7 @@
 function File(id){
 	let _this = this;
 	if(!id) id = File.uuid();
-	let info = {id, enabled:true};
+	let info = this.info = {id, enabled:true};
 	
 	this.changeInfo = function(i){
 		for(let _i in i){
