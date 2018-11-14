@@ -1,0 +1,21 @@
+{
+    "name": "Custom Web",
+    "description": "Customize web pages with custom scripts and styles",
+    "version": "0.1",
+    "manifest_version": 2,
+    "permissions" : ["storage"],
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "run_at": "document_start",
+            "js": ["content.js"]
+        }
+    ],
+    "browser_action": {
+        "title": "Edit Files"
+    }
+}

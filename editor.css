@@ -1,0 +1,92 @@
+/* reset */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+header input {
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+#editor {
+    margin: 0;
+}
+
+
+/* custom styles */
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 50px;
+    flex-shrink: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    background-color: #212121;
+}
+
+header input {
+    width: 50%;
+	box-sizing: border-box;
+    background-color: #212121;
+
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 30px;
+    color: white;
+
+    transition: padding 100ms ease-in-out;
+}
+header input:hover,
+header input:focus {
+    padding: 0 10px;
+    background-color: #303030;
+}
+
+header button {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 18px;
+    color: black;
+
+    cursor: pointer;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#editor {
+    flex-grow: 1;
+}
+
+
+/* better monokai */
+
+#editor.ace-monokai {
+    background-color: #303030;
+}
+
+#editor.ace-monokai .ace_gutter {
+    background-color: #424242;
+}
+
+#editor.ace-monokai .ace_selection {
+    background-color: #646464;
+}
+
+#editor.ace-monokai .ace_marker-layer .ace_active-line {
+    background-color: rgba(0,0,0,0.25);
+}
