@@ -1,0 +1,95 @@
+/* reset */
+header input {
+    padding: 0;
+    background-color: transparent;
+    outline: none;
+    border: none;
+}
+#editor {
+    margin: 0;
+}
+
+/* custom styles */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    align-items: center;
+
+    height: 50px;
+    flex-shrink: 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+
+    background-color: var(--top);
+}
+header .check{
+	margin-right:25px;
+}
+header input {
+    width: 50%;
+    background-color: var(--top);
+
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 30px;
+    color: white;
+	cursor:pointer;
+
+    transition: padding 100ms ease-in-out;
+}
+header input:hover,
+header input:focus {
+    padding: 0 10px;
+    background-color: var(--light);
+}
+header input:focus{
+	cursor:auto;
+}
+header button {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-size: 18px;
+    color: black;
+	margin-left:auto;
+
+    cursor: pointer;
+}
+
+h2{
+	margin:0;
+	padding:10px 0px 10px 20px;
+	font-size:25px;
+	color:white;
+	font-weight:400;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#editor {
+    flex-grow: 1;
+}
+
+
+/* better monokai */
+
+#editor.ace-monokai {
+    background-color: var(--background);
+}
+
+#editor.ace-monokai .ace_gutter {
+    background-color: var(--light);
+}
+
+#editor.ace-monokai .ace_selection {
+    background-color: var(--lighter);
+}
+
+#editor.ace-monokai .ace_marker-layer .ace_active-line {
+    background-color: var(--top);
+}
