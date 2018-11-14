@@ -7,32 +7,17 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
 editor.session.setMode("ace/mode/javascript");
 
-chrome.storage.sync.get([fileId], (result) => {
-    var info = result[fileId];
-    
-    if(!info || !info.id) {
-        alert("File not found");
-        info = {
-            id: fileId,
-            name: "New File",
-            content: ""
-        }
-    }
-
-    file = info;
-    nameInput.value = file.name;
-    editor.setValue(file.content);
+File.load(fileId).then(f => {
+	let info = (file = f).info;
+	nameInput.value = info.name;
+	editor.setValue(info.content||"");
 });
 
 function save() {
-    file.name = nameInput.value;
-    file.content = editor.getValue();
-
-    keyval = {};
-    keyval[fileId] = file;
-    chrome.storage.sync.set(keyval, function() {
-        alert("Saved");
-    });
+	let info = file.info;
+	info.name = nameInput.value;
+	info.content = editor.getValue();
+	file.save();
 }
 saveBtn.addEventListener("click", save);
 window.addEventListener("keydown", function(e){
