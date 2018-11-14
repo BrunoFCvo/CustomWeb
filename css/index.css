@@ -37,17 +37,37 @@ header #new-file{
 	display:flex;
 }
 .file .file-icons .file-icon{
+	display:flex;
+	align-items:center;
+	border-radius:20px;
+	padding:2px 0px;
+	transition: all 100ms ease-in-out;
+	cursor:pointer;
+}
+.file .file-icons .file-icon svg{
 	width: 20px;
 	height: 20px;
 	fill: white;
 	opacity:0.7;
-	cursor:pointer;
 }
-.file .file-icons .file-icon:hover{
+.file .file-icons .file-icon.icon-confirm svg,
+.file .file-icons .file-icon svg:hover{
 	opacity:1;
 }
 .file .file-icons .file-icon.icon-confirm{
-	fill:#f20;
+	background:#C00;
+	padding:2px 5px;
+}
+.file .file-icons .file-icon::before{
+	content:"DELETE";
+    font-size: 12px;
+    width: 0px;
+	overflow:hidden;
+	text-align:center;
+	transition: width 100ms ease-in-out;
+}
+.file .file-icons .file-icon.icon-confirm::before{
+	width:50px;
 }
 .file .file-icons .file-edit{
 	margin-left:auto;
