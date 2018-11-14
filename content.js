@@ -1,8 +1,6 @@
-var fileId = "script-0";      //TODO not to be hardcoded
-
-chrome.storage.sync.get([fileId], (result) => {
-    var info = result[fileId];
-    if(info) {
-        window.eval(info.content);
-    }
+File.loadEnabled().then(files => {
+	for(let i=0;i<files.length;i++){
+		//TODO check if url matches
+		window.eval(files[i].info.content);
+	}
 });

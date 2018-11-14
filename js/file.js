@@ -128,7 +128,7 @@ File.loadEnabled = function(){
 		let files = [];
 		File.loadIndex().then((index) => {
 			for(let id in index){
-				if(index[id]) files.push(File.load(File.SUFFIX+id));
+				if(index[id]) files.push(File.load(id));
 			}
 			Promise.all(files).then((files) => {
 				succ(files);

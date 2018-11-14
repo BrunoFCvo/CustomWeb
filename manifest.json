@@ -12,7 +12,11 @@
         {
             "matches": ["<all_urls>"],
             "run_at": "document_start",
-            "js": ["content.js"]
+            "js": [
+				"js/storage.js",
+				"js/file.js",
+				"content.js"
+			]
         }
     ],
     "browser_action": {
