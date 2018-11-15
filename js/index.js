@@ -61,12 +61,11 @@ File.loadAll().then(function(files){
 });
 
 let newFile = document.getElementById("new-file");
-newFile.addEventListener("click", function(){
+newFile.addEventListener("click", function(e){
+	let type = e.target.getAttribute("type");
+	if(!type) return;
 	let f = new File();
-	f.changeInfo({
-		name: "New File",
-		type: "JS"
-	});
+	f.changeInfo({type, name: "New File"});
 	f.save().then(function(){
 		createFileEntry(f, filesElement);
 	});

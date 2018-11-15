@@ -1,3 +1,8 @@
+svg{
+	max-width:100%;
+	max-height:100%;
+}
+
 header{
 	width:100%;
 	height:50px;
@@ -11,9 +16,45 @@ header{
 	font-size:30px;
 }
 header #new-file{
+	position:relative;
+    display: grid;
 	width: 40px;
 	height: 40px;
+	align-items:center;
+}
+header #new-file #new-file-type{
+	position:absolute;
+	top:0; right: 50%;
+	display: flex;
+	justify-content: space-between;
+	width:0; height:100%;
+	padding-right:20px;
+	pointer-events:none;
+	overflow:hidden;
+	font-size:14px;
+	opacity:0;
+	transition: all 100ms ease-in-out;
+}
+header #new-file:hover #new-file-type{
+	opacity:1;
+	width:105px;
+	pointer-events:all;
+}
+header #new-file #new-file-type span{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	flex-shrink:0;
+	width:40px;
+	height:40px;
+	border-radius: 100%;
 	cursor:pointer;
+	
+	background: transparent;
+	transition: all 100ms ease-in-out;
+}
+header #new-file #new-file-type span:hover{
+	background: var(--light);
 }
 #files{
 	padding:10px 20px;
@@ -23,7 +64,7 @@ header #new-file{
 	color:white;
 	padding:10px 8px;
 	display:grid;
-	grid-template-columns: 60px 300px 100px auto;
+	grid-template-columns: 60px auto 50px 125px;
 	align-items:center;
 	font-size:16px;
 }
