@@ -1,5 +1,5 @@
 /* reset */
-header input {
+input {
     padding: 0;
     background-color: transparent;
     outline: none;
@@ -96,8 +96,102 @@ main {
     flex-grow: 1;
 }
 
-/* liinks popup */
-#links-detail { display: none; }
+/* links popup */
+#links-popup {
+    display: none; /* flex */
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+
+    position: absolute;
+    margin: auto;
+    top: 0; bottom: 0;
+    right: 0; left: 0;
+    z-index: 10;
+
+    background-color: var(--light);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+#links-popup header h1 {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: normal;
+    font-size: 30px;
+    color: white;
+}
+
+#links-popup header #links-close-btn {
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    fill: white;
+    cursor: pointer;
+}
+
+#links-popup main {
+    padding: 20px;
+    overflow: auto;
+}
+
+#links-popup main .link-entry {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+#links-popup main .link-entry input {
+    display: block;
+    height: 30px;
+    width: 100%;
+    flex-grow: 1;
+    padding: 10px;
+
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    color: white;
+
+    cursor: pointer;
+}
+#links-popup main .link-entry input:focus {
+	cursor:auto;
+}
+#links-popup main .link-entry input:focus,
+#links-popup main .link-entry input:hover {
+    background-color: var(--lighter);
+}
+
+#links-popup main .link-entry svg {
+    height: 30px;
+    width: 30px;
+    flex-shrink: 0;
+    fill: white;
+    cursor: pointer
+}
+#links-popup main .link-entry svg:hover {
+    background-color: #c00000;
+}
+
+#add-link-btn {
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+#add-link-btn:hover {
+    background-color: var(--lighter);
+}
+
+#add-link-btn svg {
+    display: block;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    fill: white;
+}
 
 
 /* better monokai */
