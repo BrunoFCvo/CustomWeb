@@ -50,3 +50,7 @@ body{
 .check input:checked + span::before{
 	left:22px;
 }
+.check.no-transition input + span,
+.check.no-transition input + span::before{
+	transition:none;
+}

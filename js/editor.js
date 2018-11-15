@@ -10,7 +10,9 @@ editor.session.setMode("ace/mode/javascript");
 
 File.load(fileId).then(f => {
     let info = (file = f).info;
+	enableInput.parentNode.classList.add("no-transition");
     enableInput.checked = info.enabled;
+	setTimeout(function(){enableInput.parentNode.classList.remove("no-transition")}, 0)
 	nameInput.value = info.name;
     editor.setValue(info.content||"", -1);
     

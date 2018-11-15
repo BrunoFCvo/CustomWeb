@@ -53,6 +53,7 @@ header input {
     font-size: 30px;
     color: white;
 	cursor:pointer;
+    margin-right: auto;
 
     transition: padding 100ms ease-in-out;
 }
@@ -67,7 +68,6 @@ header input:focus{
 #save-btn {
     width: 40px;
     height: 40px;
-    margin-left: auto;
     pointer-events: none;
     cursor: pointer;
 }
