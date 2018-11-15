@@ -20,6 +20,8 @@ function createFileEntry(fileObject, element){
 		</div>
 	`;
 	
+	let fileName = file.querySelector(".file-name");
+	let fileType = file.querySelector(".file-type");
 	let fileEnable = file.querySelector("input");
 	fileEnable.addEventListener("change", function(){
 		info.enabled = this.checked;
@@ -43,6 +45,12 @@ function createFileEntry(fileObject, element){
 		}
 	});
 	element.appendChild(file);
+	
+	fileObject.onChange = function(info){
+		fileEnable.checked = info.enabled;
+		fileName.textContent = info.name;
+		fileType.textContent = info.type;
+	}
 }
 
 let filesElement = document.getElementById("files");

@@ -14,3 +14,20 @@ Storage.remove = function(objects){
 		chrome.storage.sync.remove(objects, succ);
 	});
 }
+Storage.callbacks = {};
+Storage.onChange = function(key, fn){
+	if(!Storage.callbacks[key]) Storage.callbacks[key] = [];
+	Storage.callbacks[key].push(fn);
+}
+Storage.emit = function(key, newValue){
+	if(!Storage.callbacks[key]) return;
+	Storage.callbacks[key].forEach(x => {
+		x(newValue);
+	});
+}
+chrome.storage.onChanged.addListener(function(objects, area){
+	if(area!="sync") return;
+	for(let id in objects){
+		Storage.emit(id, objects[id].newValue);
+	}
+});

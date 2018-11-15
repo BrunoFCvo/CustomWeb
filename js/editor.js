@@ -15,6 +15,13 @@ File.load(fileId).then(f => {
 	setTimeout(function(){enableInput.parentNode.classList.remove("no-transition")}, 0)
 	nameInput.value = info.name;
     editor.setValue(info.content||"", -1);
+	
+	f.onChange = function(info){
+		enableInput.checked = info.enabled;
+		nameInput.value = info.name;
+		editor.setValue(info.content||"", -1);
+		saveBtn.classList.remove("edited");
+	}
     
     enableInput.addEventListener("input", editorSetEdited);
     nameInput.addEventListener("input", editorSetEdited);
