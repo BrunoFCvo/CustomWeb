@@ -19,7 +19,8 @@ function File(id){
 	
 	this.onChange = function(info){}; //Placeholder function
 	Storage.onChange(File.PREFIX+id, newInfo => {
-		_this.onChange(info = _this.info = newInfo);
+		_this.changeInfo(newInfo);
+		_this.onChange(newInfo);
 	});
 }
 File.PREFIX = "FILE-";

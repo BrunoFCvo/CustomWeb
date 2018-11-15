@@ -46,8 +46,7 @@ function createFileEntry(fileObject, element){
 	});
 	element.appendChild(file);
 	
-	fileObject.onChange = function(newInfo){
-		info = newInfo;
+	fileObject.onChange = function(info){
 		fileEnable.checked = info.enabled;
 		fileName.textContent = info.name;
 		fileType.textContent = info.type;
