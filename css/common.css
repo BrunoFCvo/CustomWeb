@@ -4,7 +4,8 @@
 	--top: #212121;
 	--background: #303030;
 	--light: #424242;
-	--lighter: #666;
+	--lighter: #606060;
+	--lightest: #848484;
 }
 html{
 	height:100vh;
@@ -28,7 +29,6 @@ body{
 	display:inline-block;
 	width:40px;
 	height:20px;
-	/border:1px solid white;
 	background: #000;
 	border-radius:15px;
 	cursor:pointer;
