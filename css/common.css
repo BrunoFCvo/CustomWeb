@@ -8,6 +8,7 @@
 }
 html{
 	height:100vh;
+	font-family: "Segoe UI", Tahoma, sans-serif;
 }
 body{
 	min-height:100%;

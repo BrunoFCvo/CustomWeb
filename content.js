@@ -16,7 +16,7 @@ File.loadEnabled().then(files => {
 		} else {
 			let cssContainer = document.createElement("style");
 			cssContainer.textContent = info.content;
-			document.appendChild(cssContainer);
+			document.head.appendChild(cssContainer);
 		}
 	}
 });

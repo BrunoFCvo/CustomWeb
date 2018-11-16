@@ -22,25 +22,30 @@ header #new-file{
 	height: 40px;
 	align-items:center;
 }
+header #new-file svg{
+	z-index:1;
+}
 header #new-file #new-file-type{
 	position:absolute;
-	top:0; right: 50%;
-	display: flex;
-	justify-content: space-between;
-	width:0; height:100%;
-	padding-right:20px;
+	top:0; right: -2px;
+	width:40px; height:100%;
 	pointer-events:none;
 	overflow:hidden;
 	font-size:14px;
 	opacity:0;
+	background: var(--light);
+	border-radius:40px;
 	transition: all 100ms ease-in-out;
 }
 header #new-file:hover #new-file-type{
 	opacity:1;
-	width:105px;
+	width:120px;
 	pointer-events:all;
 }
 header #new-file #new-file-type span{
+	position:absolute;
+	top:0;
+	margin-left:5px;
 	display:flex;
 	align-items:center;
 	justify-content:center;
@@ -50,11 +55,17 @@ header #new-file #new-file-type span{
 	border-radius: 100%;
 	cursor:pointer;
 	
-	background: transparent;
+	opacity:0.8;
 	transition: all 100ms ease-in-out;
 }
+header #new-file #new-file-type span:first-child{
+	left:0px;
+}
+header #new-file #new-file-type span:last-child{
+	left:40px;
+}
 header #new-file #new-file-type span:hover{
-	background: var(--light);
+	opacity:1;
 }
 #files{
 	padding:10px 20px;
@@ -62,14 +73,13 @@ header #new-file #new-file-type span:hover{
 .file{
 	position:relative;
 	color:white;
-	padding:10px 8px;
+	height:45px;
+	padding:10px 15px;
 	display:grid;
 	grid-template-columns: 60px auto 50px 125px;
 	align-items:center;
 	font-size:16px;
-}
-.file:nth-child(even){
-	background-color: var(--light);
+	border-radius:45px;
 }
 .file:hover{
 	background: var(--lighter);
