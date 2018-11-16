@@ -8,6 +8,7 @@ input {
 #editor {
     margin: 0;
 }
+* { box-sizing: border-box; }
 
 /* custom styles */
 body {
@@ -19,6 +20,7 @@ body {
 header {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 
     height: 50px;
     flex-shrink: 0;
@@ -32,22 +34,11 @@ header .check {
 	margin-right: 10px;
 }
 
-#links-btn {
-    width: 40px;
-    height: 40px;
-    margin-right: 15px;
-    cursor: pointer;
-}
-#links-btn svg {
-    width: 40px;
-    height: 40px;
-    fill: white;
-}
-
 header input {
     width: 50%;
 	height: 40px;
     padding: 0 15px;
+    margin-right: auto;
 	border-radius: 40px;
     background-color: var(--top);
 
@@ -67,19 +58,35 @@ header input:focus{
 	cursor:auto;
 }
 
-#save-btn {
+header > span {
     width: 40px;
     height: 40px;
-    pointer-events: none;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 40px;
     cursor: pointer;
+}
+header > span:last-child {
+    margin-right: -5px;
+}
+header > span:hover {
+    background-color: var(--light);
+}
+
+header > span svg {
+    width: 100%;
+    height: 100%;
+    fill: white;
+}
+
+#save-btn {
+    pointer-events: none;
 }
 #save-btn.edited {
     pointer-events: all;
 }
+
 #save-btn svg {
-    width: 40px;
-    height: 40px;
-    fill: white;
     opacity: 0.25;
     transition: opacity 100ms ease-in-out;
 }
@@ -106,7 +113,8 @@ main {
     width: 100%;
     max-width: 600px;
     height: 500px;
-	border-radius: 20px;
+    border-radius: 20px;
+    overflow: hidden;
 
     position: absolute;
     margin: auto;
@@ -117,14 +125,14 @@ main {
     background-color: var(--light);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 }
-#links-popup header{
+#links-popup header {
 	background: none;
-	padding-top:10px;
+    background-color: var(--background);
 }
 #links-popup header h1 {
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-weight: normal;
-    font-size: 30px;
+    font-size: 24px;
     color: white;
 }
 
@@ -139,66 +147,79 @@ main {
 
 #links-popup main {
     align-items: center;
+}
+
+#links-popup main #links-wrapper {
+    width: 100%;
+    height: 100%;
     padding: 20px;
     overflow: auto;
 }
 
-#links-popup main .link-entry {
+#links-popup main #links-wrapper .link-entry {
     position: relative;
     width: 100%;
     flex-shrink: 0;
 	margin-bottom: 6px;
-	border-radius: 40px;
+    border-radius: 40px;
+    overflow: hidden;
 }
 
-#links-popup main .link-entry input {
+#links-popup main #links-wrapper .link-entry input {
     display: block;
     height: 40px;
     width: 100%;
 	border-radius: 40px;
     padding: 10px 15px;
-    padding-right: 40px;
+    padding-left: 40px;
 
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-weight: normal;
     font-size: 16px;
-    color: white;
-	opacity:0.5;
+    color: rgb(235, 227, 227);
+	opacity: 0.75;
 
     cursor: pointer;
 }
-#links-popup main .link-entry:hover,
-#links-popup main .link-entry input:focus {
+#links-popup main #links-wrapper .link-entry:hover,
+#links-popup main #links-wrapper .link-entry input:focus {
     background-color: var(--lighter);
-	opacity:1;
+	opacity: 1;
 }
-#links-popup main .link-entry input:focus {
+#links-popup main #links-wrapper .link-entry input:focus {
 	cursor:auto;
 }
 
-#links-popup main .link-entry svg {
+#links-popup main #links-wrapper .link-entry svg {
     position: absolute;
-    top: 0; right: 5px;
+    top: 0; left: 0px;
 
     height: 40px;
     width: 40px;
     padding: 5px;
+    border-radius: 100%;
     flex-shrink: 0;
 
     fill: white;
-    opacity: 0.5;
+    opacity: 0;
     cursor: pointer
 }
-#links-popup main .link-entry svg:hover {
+#links-popup main #links-wrapper .link-entry:hover svg,
+#links-popup main #links-wrapper .link-entry input:focus + svg {
+    opacity: 0.5;
+}
+#links-popup main #links-wrapper .link-entry svg:hover {
     opacity: 1;
 }
 
 #add-link-btn {
-    display: flex;
-    align-items: center;
     width: 40px;
     height: 40px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: -10px;
     border-radius: 100%;
+    
     cursor: pointer;
 }
 #add-link-btn:hover {
@@ -207,8 +228,8 @@ main {
 
 #add-link-btn svg {
     display: block;
-    height: 30px;
-    width: 30px;
+    height: 100%;
+    width: 100%;
     margin: auto;
     fill: white;
 }

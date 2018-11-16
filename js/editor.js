@@ -42,8 +42,7 @@ function editorSetEdited() {
 /* links */
 let popupActive = false;
 let popup = document.getElementById("links-popup");
-let linksCloseBtn = document.getElementById("links-close-btn");
-let linksContainer = popup.querySelector("main");
+let linksWrapper = document.getElementById("links-wrapper");
 let addLinkBtn = document.getElementById("add-link-btn");
 
 linksBtn.addEventListener("click", (e) => {
@@ -65,13 +64,12 @@ function linksClose() {
 		popupActive = false;
 	}
 }
-linksCloseBtn.addEventListener("click", linksClose);
-document.addEventListener("click", linksClose);
+document.addEventListener("mousedown", linksClose);
 window.addEventListener("keydown", (e) => {
 	if(e.key === "Escape") { linksClose(); }
 });
 
-popup.addEventListener("click", (e) => {
+popup.addEventListener("mousedown", (e) => {
 	e.stopPropagation();
 });
 
@@ -79,7 +77,7 @@ function createLinkEntry(link = "") {
 	let entry = document.createElement("div");
 	entry.className = "link-entry";
 	entry.innerHTML = `
-		<input type="text" value="${link}"/>
+		<input type="text" value="${link}" placeholder="https://www.example.com/*"/>
 		<svg viewBox="0 0 24 24">
 			<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
 		</svg>
@@ -94,7 +92,7 @@ function createLinkEntry(link = "") {
 			editorSetEdited();
 		});
 
-	linksContainer.insertBefore(entry, addLinkBtn);
+	linksWrapper.appendChild(entry);
 }
 addLinkBtn.addEventListener("click", () => { 
 	createLinkEntry();
@@ -109,7 +107,7 @@ function save() {
 	info.content = editor.getValue();
 
 	let links = [];
-	let inputs = linksContainer.querySelectorAll("input");
+	let inputs = linksWrapper.querySelectorAll("input");
 	if(inputs) {
 		inputs.forEach((input) => {
 			links.push(input.value);
