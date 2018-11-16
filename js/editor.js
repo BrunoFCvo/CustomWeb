@@ -7,7 +7,6 @@ let linksBtn = document.getElementById("links-btn");
 let saveBtn = document.getElementById("save-btn");
 let editor = ace.edit("editor");
 editor.setTheme("ace/theme/monokai");
-editor.session.setMode("ace/mode/javascript");
 
 File.load(fileId).then((f) => {
     let info = (file = f).info;
@@ -17,6 +16,12 @@ File.load(fileId).then((f) => {
 	nameInput.value = info.name;
     editor.setValue(info.content||"", -1);
 	
+	if(info.type == "JS") {
+		editor.session.setMode("ace/mode/javascript");
+	} else {
+		editor.session.setMode("ace/mode/css");
+	}
+
 	if(info.links) {
 		info.links.forEach((link) => {
 			createLinkEntry(link);
@@ -51,8 +56,7 @@ linksBtn.addEventListener("click", (e) => {
 	if(popupActive) {
 		popup.style.display = "none";
 		popupActive = false;
-	} 
-	else {
+	} else {
 		popup.style.display = "flex";
 		popupActive = true;
 	}
@@ -63,6 +67,7 @@ function linksClose() {
 		popup.style.display = "none";
 		popupActive = false;
 	}
+	save();
 }
 document.addEventListener("mousedown", linksClose);
 window.addEventListener("keydown", (e) => {
@@ -100,6 +105,8 @@ addLinkBtn.addEventListener("click", () => {
 });
 
 /* save */
+enableInput.addEventListener("change", save);
+
 function save() {
     let info = file.info;
     info.enabled = enableInput.checked;
