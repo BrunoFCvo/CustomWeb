@@ -67,6 +67,9 @@ function linksClose() {
 }
 linksCloseBtn.addEventListener("click", linksClose);
 document.addEventListener("click", linksClose);
+window.addEventListener("keydown", (e) => {
+	if(e.key === "Escape") { linksClose(); }
+});
 
 popup.addEventListener("click", (e) => {
 	e.stopPropagation();
@@ -93,7 +96,6 @@ function createLinkEntry(link = "") {
 
 	linksContainer.insertBefore(entry, addLinkBtn);
 }
-
 addLinkBtn.addEventListener("click", () => { 
 	createLinkEntry();
 	editorSetEdited();
