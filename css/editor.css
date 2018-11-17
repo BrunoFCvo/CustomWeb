@@ -177,7 +177,7 @@ main {
     font-weight: normal;
     font-size: 16px;
     color: rgb(235, 227, 227);
-	opacity: 0.75;
+	opacity: 1;
 
     cursor: pointer;
 }
@@ -196,7 +196,7 @@ main {
 
     height: 40px;
     width: 40px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 100%;
     flex-shrink: 0;
 

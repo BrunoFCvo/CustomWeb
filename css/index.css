@@ -15,58 +15,55 @@ header{
 	fill:white;
 	font-size:30px;
 }
-header #new-file{
-	position:relative;
-    display: grid;
+
+header #new-file {
+	display: flex;
+	justify-content: flex-end;
 	width: 40px;
 	height: 40px;
-	align-items:center;
+	border-radius: 40px;
+	overflow: hidden;
+	align-items: center;
+
+	transition: width 100ms ease-in-out;
 }
-header #new-file svg{
-	z-index:1;
+header #new-file:hover {
+	width: 150px;
+	background-color: var(--light);
 }
-header #new-file #new-file-type{
-	position:absolute;
-	top:0; right: -2px;
-	width:40px; height:100%;
-	pointer-events:none;
-	overflow:hidden;
-	font-size:14px;
-	opacity:0;
-	background: var(--light);
-	border-radius:40px;
-	transition: all 100ms ease-in-out;
+
+header #new-file span.btn {
+	flex-grow: 1;
+	flex-shrink: 1;
+	min-width: 50px;
+	padding: 10px;
+
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+	user-select: none;
 }
-header #new-file:hover #new-file-type{
-	opacity:1;
-	width:120px;
-	pointer-events:all;
+header #new-file span:first-child {
+	padding-left: 15px
 }
-header #new-file #new-file-type span{
-	position:absolute;
-	top:0;
-	margin-left:5px;
-	display:flex;
-	align-items:center;
-	justify-content:center;
-	flex-shrink:0;
-	width:40px;
-	height:40px;
-	border-radius: 100%;
-	cursor:pointer;
-	
-	opacity:0.8;
-	transition: all 100ms ease-in-out;
+header #new-file span.btn:hover {
+	background-color: var(--lighter);
 }
-header #new-file #new-file-type span:first-child{
-	left:0px;
+
+header #new-file .btn-wrapper {
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	padding: 5px;
 }
-header #new-file #new-file-type span:last-child{
-	left:40px;
+
+header #new-file .btn-wrapper svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	fill: white;
 }
-header #new-file #new-file-type span:hover{
-	opacity:1;
-}
+
 #files{
 	padding:10px 20px;
 }
