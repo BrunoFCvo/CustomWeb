@@ -28,6 +28,7 @@ Storage.emit = function(key, newValue){
 chrome.storage.onChanged.addListener(function(objects, area){
 	if(area!="sync") return;
 	for(let id in objects){
-		Storage.emit(id, objects[id].newValue);
+		let newValue = objects[id].newValue;
+		if(newValue) { Storage.emit(id, newValue); }
 	}
 });

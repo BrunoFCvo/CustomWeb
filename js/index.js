@@ -68,7 +68,7 @@ File.loadAll().then(function(files){
 let newFileJS = document.getElementById("new-js");
 newFileJS.addEventListener("click", () => {
 	let f = new File();
-	f.changeInfo({type: "JS", name: "New script file"});
+	f.changeInfo({type: "JS", name: "New Script"});
 	f.save().then(() => {
 		createFileEntry(f, filesElement);
 	});
@@ -77,8 +77,61 @@ newFileJS.addEventListener("click", () => {
 let newFileCSS = document.getElementById("new-css");
 newFileCSS.addEventListener("click", () => {
 	let f = new File();
-	f.changeInfo({type: "CSS", name: "New style file"});
+	f.changeInfo({type: "CSS", name: "New Stylesheet"});
 	f.save().then(() => {
 		createFileEntry(f, filesElement);
 	});
 });
+
+/* file input */
+function newFromFile(inFile) {
+	let info = {};
+
+	if(inFile.type == "text/javascript") {
+		info.type = "JS";
+	} else if(inFile.type == "text/css") {
+		info.type = "CSS";
+	} else {
+		alert("Unsupported file type");
+		return;
+	}
+	info.name = inFile.name;
+
+	let reader = new FileReader();
+	reader.addEventListener("load", () => {
+		info.content = reader.result;
+
+		let f = new File();
+		f.changeInfo(info);
+		f.save().then(() => {
+			createFileEntry(f, filesElement);
+		});
+	});
+	reader.readAsText(inFile);
+}
+
+document.body.addEventListener("dragover", (e) => {
+	e.preventDefault();
+	e.stopPropagation();
+	document.body.classList.add("drag-over");
+});
+document.body.addEventListener("dragleave", (e) => {
+	e.preventDefault();
+	e.stopPropagation();
+	document.body.classList.remove("drag-over");
+});
+document.body.addEventListener("drop", (e) => {
+	e.preventDefault();
+	e.stopPropagation();
+	document.body.classList.remove("drag-over");
+	newFromFile(e.dataTransfer.files[0]);
+});
+
+let inputFile = document.createElement("input");
+inputFile.type = "file";
+inputFile.addEventListener("change", () => {
+	newFromFile(inputFile.files[0]);
+});
+
+let newFileUp = document.getElementById("new-up");
+newFileUp.addEventListener("click", () => { inputFile.click(); });

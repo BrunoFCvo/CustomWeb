@@ -3,6 +3,10 @@ svg{
 	max-height:100%;
 }
 
+body.drag-over{
+	background-color: var(--light); 
+}
+
 header{
 	width:100%;
 	height:50px;
@@ -34,7 +38,7 @@ header #new-file {
 	transition: width 100ms ease-in-out;
 }
 header #new-file:hover {
-	width: 120px;
+	width: 175px;
 	background-color: var(--light);
 }
 
@@ -44,7 +48,8 @@ header #new-file span.btn {
 	justify-content:center;
 	flex-grow: 1;
 	flex-shrink: 1;
-	height:100%;
+	min-width: 30px;
+	height: 100%;
 	opacity:0.5;
 
 	text-align: center;
@@ -54,20 +59,17 @@ header #new-file span.btn {
 }
 header #new-file span.btn:hover {
 	opacity:1;
-	filter:drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
-}
-header #new-file span.btn:first-child {
-	margin-left:10px;
+	text-shadow: 0 0 0 rgba(255, 255, 255, 0.5);
 }
 
-header #new-file .btn-wrapper {
+header #new-file .btn-svg {
 	flex-shrink: 0;
 	width: 40px;
 	height: 40px;
 	padding: 5px;
 }
 
-header #new-file .btn-wrapper svg {
+header #new-file .btn-svg svg {
 	display: block;
 	width: 100%;
 	height: 100%;
