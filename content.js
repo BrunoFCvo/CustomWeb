@@ -1,6 +1,9 @@
 let promise = new Promise((succ, err) => {
-	window.addEventListener("DOMContentLoaded", e => {
-		succ();
+	let interval = setInterval(_ => {
+		if(document.head){
+			clearInterval(interval);
+			succ();
+		}
 	});
 });
 File.loadEnabled().then(files => {
