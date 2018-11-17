@@ -31,12 +31,10 @@ File.load(fileId).then((f) => {
 	f.onChange = function(info){
 		enableInput.checked = info.enabled;
 		nameInput.value = info.name;
-		editor.setValue(info.content||"", -1);
-		saveBtn.classList.remove("edited");
 	}
     
     enableInput.addEventListener("input", editorSetEdited);
-    nameInput.addEventListener("input", editorSetEdited);
+	nameInput.addEventListener("input", editorSetEdited);
     editor.session.on("change", editorSetEdited);
 });
 
@@ -66,8 +64,8 @@ function linksClose() {
 	if(popupActive) {
 		popup.style.display = "none";
 		popupActive = false;
+		save();
 	}
-	save();
 }
 document.addEventListener("mousedown", linksClose);
 window.addEventListener("keydown", (e) => {

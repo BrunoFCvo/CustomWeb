@@ -60,13 +60,20 @@ File.loadAll().then(function(files){
 	}
 });
 
-let newFile = document.getElementById("new-file");
-newFile.addEventListener("click", function(e){
-	let type = e.target.getAttribute("type");
-	if(!type) return;
+let newFileJS = document.getElementById("new-js");
+newFileJS.addEventListener("click", () => {
 	let f = new File();
-	f.changeInfo({type, name: "New File"});
-	f.save().then(function(){
+	f.changeInfo({type: "JS", name: "New script file"});
+	f.save().then(() => {
+		createFileEntry(f, filesElement);
+	});
+});
+
+let newFileCSS = document.getElementById("new-css");
+newFileCSS.addEventListener("click", () => {
+	let f = new File();
+	f.changeInfo({type: "CSS", name: "New style file"});
+	f.save().then(() => {
 		createFileEntry(f, filesElement);
 	});
 });
