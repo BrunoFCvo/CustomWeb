@@ -1,3 +1,8 @@
+let promise = new Promise((succ, err) => {
+	window.addEventListener("DOMContentLoaded", e => {
+		succ();
+	});
+});
 File.loadEnabled().then(files => {
 	for(let i = 0; i < files.length; i++){
 		let info = files[i].info;
@@ -14,9 +19,11 @@ File.loadEnabled().then(files => {
 		if(info.type == "JS") {
 			window.eval(info.content);
 		} else {
-			let cssContainer = document.createElement("style");
-			cssContainer.textContent = info.content;
-			document.head.appendChild(cssContainer);
+			promise.then(_ => {
+				let cssContainer = document.createElement("style");
+				cssContainer.textContent = info.content;
+				document.head.appendChild(cssContainer);
+			})
 		}
 	}
 });
