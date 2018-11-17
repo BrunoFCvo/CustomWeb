@@ -28,9 +28,7 @@ function createFileEntry(fileObject, element){
 		fileObject.save();
 	});
 	let fileEdit = file.querySelector(".file-icon.file-edit");
-	fileEdit.addEventListener("click", function(){
-		chrome.tabs.create({url: chrome.runtime.getURL("editor.html#"+info.id)});
-	});
+	fileEdit.addEventListener("click", edit);
 	let fileDelete = file.querySelector(".file-icon.file-delete");
 	fileDelete.addEventListener("click", function(){
 		if(fileDelete.classList.contains("icon-confirm")){
@@ -44,12 +42,19 @@ function createFileEntry(fileObject, element){
 			}, 1000);
 		}
 	});
+	file.addEventListener("click", e => {
+		if(e.target.className=="file") edit();
+	});
 	element.appendChild(file);
 	
 	fileObject.onChange = function(info){
 		fileEnable.checked = info.enabled;
 		fileName.textContent = info.name;
 		fileType.textContent = info.type;
+	}
+	
+	function edit(){
+		chrome.tabs.create({url: chrome.runtime.getURL("editor.html#"+info.id)});
 	}
 }
 

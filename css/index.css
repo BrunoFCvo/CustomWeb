@@ -8,12 +8,18 @@ header{
 	height:50px;
 	display: flex;
 	align-items:center;
-	justify-content:space-between;
 	padding:0px 20px;
 	background-color: var(--top);
 	color:white;
 	fill:white;
 	font-size:30px;
+}
+header img{
+	width:36px;
+	margin-right:10px;
+}
+header img + span{
+	margin-right:auto;
 }
 
 header #new-file {
@@ -28,26 +34,30 @@ header #new-file {
 	transition: width 100ms ease-in-out;
 }
 header #new-file:hover {
-	width: 150px;
+	width: 120px;
 	background-color: var(--light);
 }
 
 header #new-file span.btn {
+	display:flex;
+	align-items:center;
+	justify-content:center;
 	flex-grow: 1;
 	flex-shrink: 1;
-	min-width: 50px;
-	padding: 10px;
+	height:100%;
+	opacity:0.5;
 
 	text-align: center;
-	font-size: 16px;
+	font-size: 14px;
 	cursor: pointer;
 	user-select: none;
 }
-header #new-file span:first-child {
-	padding-left: 15px
-}
 header #new-file span.btn:hover {
-	background-color: var(--lighter);
+	opacity:1;
+	filter:drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+}
+header #new-file span.btn:first-child {
+	margin-left:10px;
 }
 
 header #new-file .btn-wrapper {
@@ -77,12 +87,18 @@ header #new-file .btn-wrapper svg {
 	align-items:center;
 	font-size:16px;
 	border-radius:45px;
+	cursor:pointer;
 }
 .file:hover{
 	background: var(--lighter);
 }
+.file .file-name,
+.file .file-type{
+	pointer-events:none;
+}
 .file .file-icons{
 	display:flex;
+	pointer-events:none;
 }
 .file .file-icons .file-icon{
 	display:flex;
@@ -91,6 +107,7 @@ header #new-file .btn-wrapper svg {
 	padding:2px 0px;
 	transition: all 100ms ease-in-out;
 	cursor:pointer;
+	pointer-events:all;
 }
 .file .file-icons .file-icon svg{
 	width: 20px;

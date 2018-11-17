@@ -18,7 +18,8 @@ body{
 }
 
 .check{
-	display: flex;
+	display: inline-flex;
+	width:40px;
 	margin-right: 10px;
 }
 .check input{
