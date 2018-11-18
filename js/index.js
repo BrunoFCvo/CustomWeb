@@ -3,16 +3,16 @@ function createFileEntry(fileObject, element){
 	let file = document.createElement("div");
 	file.className = "file";
 	file.innerHTML = `
-		<label class="check"><input type="checkbox" ${info.enabled?"checked='true'":""}><span></span></label>
+		<label class="check" title="Enable or disable file"><input type="checkbox" ${info.enabled?"checked='true'":""}><span></span></label>
 		<span class="file-name">${info.name}</span>
 		<span class="file-type">${info.type}</span>
 		<div class="file-icons">
-			<span class="file-icon file-edit">
+			<span class="file-icon file-edit" title="Edit file">
 				<svg viewBox="0 0 48 48">
 					<path d="M6 34.5v7.5h7.5l22.13-22.13-7.5-7.5-22.13 22.13zm35.41-20.41c.78-.78.78-2.05 0-2.83l-4.67-4.67c-.78-.78-2.05-.78-2.83 0l-3.66 3.66 7.5 7.5 3.66-3.66z"/>
 				</svg>
 			</span>
-			<span class="file-icon file-delete">
+			<span class="file-icon file-delete" title="Delete file">
 				<svg viewBox="0 0 48 48">
 					<path d="M12 38c0 2.21 1.79 4 4 4h16c2.21 0 4-1.79 4-4v-24h-24v24zm26-30h-7l-2-2h-10l-2 2h-7v4h28v-4z"/>
 				</svg>
@@ -86,20 +86,28 @@ newFileCSS.addEventListener("click", () => {
 /* file input */
 function newFromFile(inFile) {
 	let info = {};
-
+	
 	if(inFile.type == "text/javascript") {
 		info.type = "JS";
+		info.name = inFile.name.match(/(.*)\..*$/);
 	} else if(inFile.type == "text/css") {
 		info.type = "CSS";
+		info.name = inFile.name.match(/(.*)\..*$/);
+	} else if(inFile.type == "application/json") {
 	} else {
 		alert("Unsupported file type");
 		return;
 	}
-	info.name = inFile.name;
 
 	let reader = new FileReader();
 	reader.addEventListener("load", () => {
-		info.content = reader.result;
+		if(inFile.type == "application/json") {
+			try {
+				info = JSON.parse(reader.result);
+			} catch(e) { alert("The uploaded json file is not valid"); }
+		} else {
+			info.content = reader.result;
+		}
 
 		let f = new File();
 		f.changeInfo(info);

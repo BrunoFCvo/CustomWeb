@@ -66,6 +66,9 @@ header > span {
     border-radius: 40px;
     cursor: pointer;
 }
+header > span#download-btn {
+    padding: 7px;
+}
 header > span:last-child {
     margin-right: -5px;
 }

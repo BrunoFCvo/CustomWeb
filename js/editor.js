@@ -42,6 +42,23 @@ function editorSetEdited() {
     saveBtn.classList.add("edited");
 }
 
+/* export */
+let downloadLink = document.createElement("a");
+downloadLink.style.display = "none";
+document.body.appendChild(downloadLink);
+
+let downloadBtn = document.getElementById("download-btn");
+downloadBtn.addEventListener("click", () => {
+	save();
+	let info = file.info;
+	delete info.id;
+	downloadLink.href = "data:text/json;charset=utf-8," + 
+		encodeURIComponent(JSON.stringify(info));
+	downloadLink.download = info.name + ".json";
+	downloadLink.click();
+});
+
+
 /* links */
 let popupActive = false;
 let popup = document.getElementById("links-popup");
@@ -81,7 +98,7 @@ function createLinkEntry(link = "") {
 	entry.className = "link-entry";
 	entry.innerHTML = `
 		<input type="text" value="${link}" placeholder="https://www.example.com/*"/>
-		<svg viewBox="0 0 24 24">
+		<svg viewBox="0 0 24 24" title="Delete entry">
 			<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
 		</svg>
 	`;
@@ -121,7 +138,6 @@ function save() {
 	info.links = links;
 	
     file.save();
-    
     saveBtn.classList.remove("edited");
 }
 saveBtn.addEventListener("click", save);
