@@ -1,11 +1,6 @@
-let promise = new Promise((succ, err) => {
-	let interval = setInterval(_ => {
-		if(document.head){
-			clearInterval(interval);
-			succ();
-		}
-	});
-});
+let myHead = document.createElement("custom-web");
+document.documentElement.appendChild(myHead);
+
 File.loadEnabled().then(files => {
 	for(let i = 0; i < files.length; i++){
 		let info = files[i].info;
@@ -20,13 +15,13 @@ File.loadEnabled().then(files => {
 		}
 
 		if(info.type == "JS") {
-			window.eval(info.content);
+			let jsContainer = document.createElement("script");
+			jsContainer.innerHTML = info.content;
+			myHead.appendChild(jsContainer);
 		} else {
-			promise.then(_ => {
-				let cssContainer = document.createElement("style");
-				cssContainer.textContent = info.content;
-				document.head.appendChild(cssContainer);
-			})
+			let cssContainer = document.createElement("style");
+			cssContainer.textContent = info.content;
+			myHead.appendChild(cssContainer);
 		}
 	}
 });
