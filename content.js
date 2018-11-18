@@ -18,7 +18,7 @@ File.loadAll().then(files => {
 		if(!info.enabled) continue;
 		if(info.type == "JS") {
 			let jsContainer = document.createElement("script");
-			jsContainer.innerHTML = info.content;
+			jsContainer.textContent = info.content;
 			myHead.appendChild(jsContainer);
 		} else {
 			let cssContainer = document.createElement("style");

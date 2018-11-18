@@ -1,7 +1,11 @@
+html{
+	height:auto;
+}
 body{
 	width:200px;
 	color:white;
 	padding:3px 0px;
+	font-size:12px;
 }
 img{
 	height:22px;
