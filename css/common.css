@@ -20,6 +20,7 @@ body{
 .check{
 	display: inline-flex;
 	width:40px;
+	height:20px;
 	margin-right: 10px;
 }
 .check input{
@@ -28,10 +29,10 @@ body{
 .check input + span{
 	position:relative;
 	display:inline-block;
-	width:40px;
-	height:20px;
+	width:100%;
+	height:100%;
 	background: #000;
-	border-radius:15px;
+	border-radius:1000px;
 	cursor:pointer;
 	transition: background 100ms ease-in-out;
 }
@@ -40,19 +41,30 @@ body{
 }
 .check input + span::before{
 	content:"";
-	position:absolute;
-	top:3px; left:4px;
 	display:inline-block;
-	width:14px;
-	height:14px;
+	width:20px; height:20px;
+	margin-left:1px;
+	border:3px solid transparent;
+    background-clip: padding-box;
+	box-sizing:border-box;
 	border-radius:100%;
-	background:white;
-	transition: left 100ms ease-in-out;
+	background-color:white;
+	transition: all 100ms ease-in-out;
 }
 .check input:checked + span::before{
-	left:22px;
+	transform: translateX(100%);
+	margin-left:-1px;
 }
 .check.no-transition input + span,
 .check.no-transition input + span::before{
 	transition:none;
+}
+/* Small Check */
+.check.small{
+	width:34px;
+	height:17px;
+}
+.check.small input + span::before{
+	width:17px;
+	height:17px;
 }
