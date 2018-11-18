@@ -7,10 +7,6 @@
     "version": "0.1",
     "manifest_version": 2,
     "permissions" : ["storage"],
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-    },
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
@@ -24,7 +20,8 @@
         }
     ],
     "browser_action": {
-        "title": "Edit Files",
-		"default_icon": "icon.png"
+        "default_title": "Custom Web",
+		"default_icon": "icon.png",
+		"default_popup": "popup.html"
     }
 }

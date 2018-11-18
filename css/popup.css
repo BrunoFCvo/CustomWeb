@@ -1,0 +1,55 @@
+html{
+	height:auto;
+}
+body{
+	width:200px;
+	color:white;
+	padding:3px 0px;
+	font-size:12px;
+}
+img{
+	height:22px;
+	width:22px;
+	justify-self:center;
+}
+.title{
+	font-size:16px;
+}
+.line{
+	display:grid;
+	align-items:center;
+	grid-template-columns: 34px auto 25px;
+    column-gap: 10px;
+	height:30px;
+	padding:0px 10px;
+}
+.line .check{
+	flex-shrink:0;
+}
+.line > span{
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	pointer-events:none;
+}
+.line > span + span{
+	opacity:0.5;
+    justify-self: center;
+}
+
+.btn{
+	cursor:pointer;
+}
+.btn:hover{
+	opacity:1;
+	background: var(--lighter);
+}
+#active{
+	margin-top:3px;
+	padding-top:3px;
+	border-top:1px solid var(--light);
+}
+#active:empty{
+	display:none;
+}

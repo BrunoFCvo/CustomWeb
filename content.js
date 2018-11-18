@@ -1,7 +1,8 @@
 let myHead = document.createElement("custom-web");
 document.documentElement.appendChild(myHead);
 
-File.loadEnabled().then(files => {
+File.loadAll().then(files => {
+	let activeFiles = [];
 	for(let i = 0; i < files.length; i++){
 		let info = files[i].info;
 		
@@ -13,10 +14,11 @@ File.loadEnabled().then(files => {
 			}
 			if(!found) continue;
 		}
-
+		activeFiles.push(info);
+		if(!info.enabled) continue;
 		if(info.type == "JS") {
 			let jsContainer = document.createElement("script");
-			jsContainer.innerHTML = info.content;
+			jsContainer.textContent = info.content;
 			myHead.appendChild(jsContainer);
 		} else {
 			let cssContainer = document.createElement("style");
@@ -24,4 +26,7 @@ File.loadEnabled().then(files => {
 			myHead.appendChild(cssContainer);
 		}
 	}
+	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+		sendResponse(activeFiles);
+	});
 });
