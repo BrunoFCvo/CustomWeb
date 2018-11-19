@@ -26,6 +26,7 @@ File.load(fileId).then((f) => {
 		info.links.forEach((link) => {
 			createLinkEntry(link);
 		});
+		createLinkEntry();
 	}
 
 	f.onChange = function(info){
@@ -94,23 +95,42 @@ popup.addEventListener("mousedown", (e) => {
 });
 
 function createLinkEntry(link = "") {
+	let empty = link == "";
+
 	let entry = document.createElement("div");
 	entry.className = "link-entry";
 	entry.innerHTML = `
 		<input type="text" value="${link}" placeholder="https://www.example.com/*"/>
+		<!--
 		<svg viewBox="0 0 24 24" title="Delete entry">
 			<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
 		</svg>
+		-->
 	`;
 
-	entry.querySelector("input")
-		.addEventListener("input", editorSetEdited);
+	let entryInput = entry.querySelector("input");
+	entryInput.addEventListener("input", function() {
+		if(empty) {
+			empty = false;
+			createLinkEntry();
+		}
+		editorSetEdited();
+	});
+	entryInput.addEventListener("blur", function() {
+		if(this.value == "" && !empty) {
+			entry.remove();
+		}
+	});
 
+	/*
 	entry.querySelector("svg")
 		.addEventListener("click", () => {
-			entry.remove();
-			editorSetEdited();
+			if(!empty) {
+				entry.remove();
+				editorSetEdited();
+			}
 		});
+	*/
 
 	linksWrapper.appendChild(entry);
 }
@@ -132,7 +152,9 @@ function save() {
 	let inputs = linksWrapper.querySelectorAll("input");
 	if(inputs) {
 		inputs.forEach((input) => {
-			links.push(input.value);
+			if(input.value != "") { 
+				links.push(input.value); 
+			}
 		});
 	}
 	info.links = links;

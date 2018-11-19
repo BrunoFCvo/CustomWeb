@@ -94,6 +94,9 @@ header #new-file .btn-svg svg {
 .file:hover{
 	background: var(--lighter);
 }
+.file .file-type{
+	justify-self: center;
+}
 .file .file-name,
 .file .file-type{
 	pointer-events:none;

@@ -129,6 +129,7 @@ main {
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 }
 #links-popup header {
+    justify-content: flex-start;
 	background: none;
     background-color: var(--background);
 }
@@ -174,7 +175,6 @@ main {
     width: 100%;
 	border-radius: 40px;
     padding: 10px 15px;
-    padding-left: 40px;
 
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-weight: normal;
@@ -204,18 +204,21 @@ main {
     flex-shrink: 0;
 
     fill: white;
-    opacity: 0;
+    opacity: 0.5;
     cursor: pointer
 }
+/*
 #links-popup main #links-wrapper .link-entry:hover svg,
 #links-popup main #links-wrapper .link-entry input:focus + svg {
     opacity: 0.5;
 }
+*/
 #links-popup main #links-wrapper .link-entry svg:hover {
     opacity: 1;
 }
 
 #add-link-btn {
+    display: none;
     width: 40px;
     height: 40px;
     padding: 5px;
