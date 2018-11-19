@@ -26,7 +26,9 @@ File.loadAll().then(files => {
 			myHead.appendChild(cssContainer);
 		}
 	}
+	chrome.runtime.sendMessage({action:"badge", value:activeFiles.length});
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-		sendResponse(activeFiles);
+		if(request.action=="list")
+			sendResponse(activeFiles);
 	});
 });

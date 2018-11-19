@@ -7,7 +7,6 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 	chrome.tabs.sendMessage(tabs[0].id, {action: "list"}, list => {
 		if(!list) return;
 		list.forEach(info => {
-			console.log(info);
 			let file = new File(info.id);
 			file.changeInfo(info);
 			info = file.info;
@@ -29,7 +28,6 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 			input.checked = info.enabled;
 			input.addEventListener("change", e => {
 				file.info.enabled = input.checked;
-				console.log(file, info);
 				file.save();
 			});
 			span.appendChild(enable);
