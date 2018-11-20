@@ -3,6 +3,7 @@ document.documentElement.appendChild(myHead);
 
 File.loadAll().then(files => {
 	let activeFiles = [];
+	let enabled = 0;
 	for(let i = 0; i < files.length; i++){
 		let info = files[i].info;
 		
@@ -16,6 +17,7 @@ File.loadAll().then(files => {
 		}
 		activeFiles.push(info);
 		if(!info.enabled) continue;
+		enabled++;
 		if(info.type == "JS") {
 			let jsContainer = document.createElement("script");
 			jsContainer.textContent = info.content;
@@ -26,7 +28,7 @@ File.loadAll().then(files => {
 			myHead.appendChild(cssContainer);
 		}
 	}
-	chrome.runtime.sendMessage({action:"badge", value:activeFiles.length});
+	chrome.runtime.sendMessage({action:"badge", value:enabled});
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		if(request.action=="list")
 			sendResponse(activeFiles);
