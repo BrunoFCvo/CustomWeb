@@ -64,7 +64,6 @@ downloadBtn.addEventListener("click", () => {
 let popupActive = false;
 let popup = document.getElementById("links-popup");
 let linksWrapper = document.getElementById("links-wrapper");
-let addLinkBtn = document.getElementById("add-link-btn");
 
 linksBtn.addEventListener("click", (e) => {
 	e.stopPropagation();
@@ -85,6 +84,8 @@ function linksClose() {
 		save();
 	}
 }
+document.getElementById("close-links-btn").
+	addEventListener("click", linksClose);
 document.addEventListener("mousedown", linksClose);
 window.addEventListener("keydown", (e) => {
 	if(e.key === "Escape") { linksClose(); }
@@ -100,44 +101,38 @@ function createLinkEntry(link = "") {
 	let entry = document.createElement("div");
 	entry.className = "link-entry";
 	entry.innerHTML = `
-		<input type="text" value="${link}" placeholder="https://www.example.com/*"/>
-		<!--
+		<input type="text" value="${link}" placeholder="Add a target website"/>
 		<svg viewBox="0 0 24 24" title="Delete entry">
 			<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
 		</svg>
-		-->
 	`;
 
 	let entryInput = entry.querySelector("input");
-	entryInput.addEventListener("input", function() {
+	entryInput.addEventListener("input", () => {
 		if(empty) {
+			entrySvg.style.display = "";
 			empty = false;
 			createLinkEntry();
 		}
 		editorSetEdited();
 	});
-	entryInput.addEventListener("blur", function() {
-		if(this.value == "" && !empty) {
+	entryInput.addEventListener("blur", () => {
+		if(entryInput.value == "" && !empty) {
 			entry.remove();
 		}
 	});
 
-	/*
-	entry.querySelector("svg")
-		.addEventListener("click", () => {
-			if(!empty) {
-				entry.remove();
-				editorSetEdited();
-			}
-		});
-	*/
+	let entrySvg = entry.querySelector("svg");
+	if(empty) { entrySvg.style.display = "none"; }
+	entrySvg.addEventListener("click", () => {
+		if(!empty) {
+			entry.remove();
+			editorSetEdited();
+		}
+	});
 
 	linksWrapper.appendChild(entry);
 }
-addLinkBtn.addEventListener("click", () => { 
-	createLinkEntry();
-	editorSetEdited();
-});
 
 /* save */
 enableInput.addEventListener("change", save);

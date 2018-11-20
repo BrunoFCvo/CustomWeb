@@ -129,24 +129,21 @@ main {
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
 }
 #links-popup header {
-    justify-content: flex-start;
 	background: none;
     background-color: var(--background);
 }
 #links-popup header h1 {
+    margin-right: auto;
+
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-weight: normal;
     font-size: 24px;
     color: white;
 }
 
-#links-popup header #links-close-btn {
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
-    fill: white;
-    cursor: pointer;
-	display:none;
+#links-popup header > span {
+    width: 35px;
+    height: 35px;
 }
 
 #links-popup main {
@@ -175,6 +172,7 @@ main {
     width: 100%;
 	border-radius: 40px;
     padding: 10px 15px;
+    padding-right: 40px;
 
     font-family: "Segoe UI", Tahoma, sans-serif;
     font-weight: normal;
@@ -195,7 +193,7 @@ main {
 
 #links-popup main #links-wrapper .link-entry svg {
     position: absolute;
-    top: 0; left: 0px;
+    top: 0; right: 0px;
 
     height: 40px;
     width: 40px;
@@ -204,40 +202,15 @@ main {
     flex-shrink: 0;
 
     fill: white;
-    opacity: 0.5;
+    opacity: 0;
     cursor: pointer
 }
-/*
 #links-popup main #links-wrapper .link-entry:hover svg,
 #links-popup main #links-wrapper .link-entry input:focus + svg {
     opacity: 0.5;
 }
-*/
 #links-popup main #links-wrapper .link-entry svg:hover {
     opacity: 1;
-}
-
-#add-link-btn {
-    display: none;
-    width: 40px;
-    height: 40px;
-    padding: 5px;
-    margin-left: auto;
-    margin-right: -10px;
-    border-radius: 100%;
-    
-    cursor: pointer;
-}
-#add-link-btn:hover {
-    background-color: var(--lighter);
-}
-
-#add-link-btn svg {
-    display: block;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    fill: white;
 }
 
 
