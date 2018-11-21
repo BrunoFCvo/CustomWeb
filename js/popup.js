@@ -45,6 +45,11 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 			type.className = "line-item";
 			type.textContent = info.type;
 			span.appendChild(type);
+
+			file.onChange = function(info){
+				input.checked = info.enabled;
+				name.textContent = info.name;
+			}
 			
 			section.appendChild(span);
 		});
@@ -64,7 +69,7 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 
 		function add(type){
 			let f = new File();
-			f.changeInfo({type, name: "New "+(type==CSS?"Stylesheet":"Script"), links:[url]});
+			f.changeInfo({type, name: "New "+(type=="CSS"?"Stylesheet":"Script"), links:[url]});
 			f.save().then(_ => {
 				chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+f.info.id)});
 			});

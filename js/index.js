@@ -50,7 +50,6 @@ function createFileEntry(fileObject, element){
 	fileObject.onChange = function(info){
 		fileEnable.checked = info.enabled;
 		fileName.textContent = info.name;
-		fileType.textContent = info.type;
 	}
 	
 	function edit(){

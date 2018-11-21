@@ -3,7 +3,6 @@ document.documentElement.appendChild(myHead);
 
 File.loadAll().then(files => {
 	let activeFiles = [];
-	let enabled = 0;
 	for(let i = 0; i < files.length; i++){
 		let info = files[i].info;
 		
@@ -17,7 +16,6 @@ File.loadAll().then(files => {
 		}
 		activeFiles.push(info);
 		if(!info.enabled) continue;
-		enabled++;
 		if(info.type == "JS") {
 			let jsContainer = document.createElement("script");
 			jsContainer.textContent = info.content;
