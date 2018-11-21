@@ -28,9 +28,25 @@ File.loadAll().then(files => {
 			myHead.appendChild(cssContainer);
 		}
 	}
-	chrome.runtime.sendMessage({action:"badge", value:enabled});
-	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-		if(request.action=="list")
-			sendResponse(activeFiles);
+	let isTop = (window == window.top);
+	
+	if(isTop){ // Only allow top to set URL
+		chrome.runtime.sendMessage({
+			action: "set-url",
+			value: window.location.href
+		});
+	}
+	
+	chrome.runtime.sendMessage({
+		action: "add-badge",
+		value: enabled
+	});
+	chrome.runtime.sendMessage({
+		action:"add-files",
+		value:{
+			top: isTop,
+			url: window.location.href,
+			files: activeFiles
+		}
 	});
 });

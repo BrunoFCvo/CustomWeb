@@ -26,14 +26,14 @@ img{
 .line .check{
 	flex-shrink:0;
 }
-.line > span{
+.line > .line-item{
     white-space: nowrap;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
 	pointer-events:none;
 }
-.line > span + span{
+.line > .line-item + .line-item{
 	opacity:0.5;
     justify-self: center;
 }
@@ -45,11 +45,41 @@ img{
 	opacity:1;
 	background: var(--lighter);
 }
-#active{
+
+section:not(:first-child){
 	margin-top:3px;
 	padding-top:3px;
 	border-top:1px solid var(--light);
 }
-#active:empty{
-	display:none;
+section h2{
+    margin: 0;
+	font-size: 10px;
+	font-weight:400;
+	padding:0px 10px;
+	color: var(--lighter)
+}
+section h2 span{
+    max-width: 100%;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	pointer-events:none;
+}
+
+#add-new .line {
+    grid-template-columns: 50% 50%;
+    align-items: stretch;
+	column-gap:0;
+	height:20px;
+}
+#add-new .line .btn{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	opacity:0.7;
+}
+#add-new .line .btn:hover{
+	opacity:1;
+	background:none;
 }
