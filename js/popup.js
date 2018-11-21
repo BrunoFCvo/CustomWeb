@@ -1,4 +1,5 @@
 let addNew = document.getElementById("add-new");
+let section = document.getElementById("files");
 let manage = document.getElementById("manage");
 manage.addEventListener("click", e => {
 	chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
@@ -7,60 +8,45 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 	let tabID = tabs[0].id;
 	
 	// Query file list
-	chrome.runtime.sendMessage({tabID, action: "get-files"}, frames => {
-		console.log(frames);
-		if(!frames.length) return;
-		frames.forEach(frame => {
-			if(!frame.files.length) return;
-			let section = document.createElement("section");
-			section.className = "frame";
+	chrome.runtime.sendMessage({tabID, action: "get-files"}, files => {
+		if(!files || !files.length) return;
+		files.forEach(info => {
+			let file = new File(info.id);
+			file.changeInfo(info);
+			info = file.info;
 			
-			let header = document.createElement("h2");
-			let text = document.createElement("span");
-			text.textContent = (frame.top?"Top: ":"Frame: ") + frame.url;
-			header.appendChild(text);
-			section.appendChild(header);
-			
-			document.body.appendChild(section);
-			
-			frame.files.forEach(info => {
-				let file = new File(info.id);
-				file.changeInfo(info);
-				info = file.info;
-				
-				let span = document.createElement("span");
-				span.className = "line btn";
-				span.addEventListener("click", e => {
-					if(e.target.classList.contains("btn"))
-					chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+info.id)});
-				});
-				
-				let enable = document.createElement("label");
-				enable.className = "check small";
-				enable.innerHTML = `
-					<input id="enable-input" type="checkbox">
-					<span><span></span></span>
-				`;
-				let input = enable.children[0];
-				input.checked = info.enabled;
-				input.addEventListener("change", e => {
-					file.info.enabled = input.checked;
-					file.save();
-				});
-				span.appendChild(enable);
-				
-				let name = document.createElement("span");
-				name.className = "line-item";
-				name.textContent = info.name;
-				span.appendChild(name);
-				
-				let type = document.createElement("span");
-				type.className = "line-item";
-				type.textContent = info.type;
-				span.appendChild(type);
-				
-				section.appendChild(span);
+			let span = document.createElement("span");
+			span.className = "line btn";
+			span.addEventListener("click", e => {
+				if(e.target.classList.contains("btn"))
+				chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+info.id)});
 			});
+			
+			let enable = document.createElement("label");
+			enable.className = "check small";
+			enable.innerHTML = `
+				<input id="enable-input" type="checkbox">
+				<span><span></span></span>
+			`;
+			let input = enable.children[0];
+			input.checked = info.enabled;
+			input.addEventListener("change", e => {
+				file.info.enabled = input.checked;
+				file.save();
+			});
+			span.appendChild(enable);
+			
+			let name = document.createElement("span");
+			name.className = "line-item";
+			name.textContent = info.name;
+			span.appendChild(name);
+			
+			let type = document.createElement("span");
+			type.className = "line-item";
+			type.textContent = info.type;
+			span.appendChild(type);
+			
+			section.appendChild(span);
 		});
 	});
 	

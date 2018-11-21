@@ -36,17 +36,8 @@ File.loadAll().then(files => {
 			value: window.location.href
 		});
 	}
-	
 	chrome.runtime.sendMessage({
-		action: "add-badge",
-		value: enabled
-	});
-	chrome.runtime.sendMessage({
-		action:"add-files",
-		value:{
-			top: isTop,
-			url: window.location.href,
-			files: activeFiles
-		}
+		action: "add-files",
+		value: activeFiles
 	});
 });

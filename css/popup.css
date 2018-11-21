@@ -46,6 +46,10 @@ img{
 	background: var(--lighter);
 }
 
+#files:empty{
+	display:none;
+}
+
 section:not(:first-child){
 	margin-top:3px;
 	padding-top:3px;

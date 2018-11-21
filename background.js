@@ -1,9 +1,9 @@
 let tabs = {};
 function createTab(id){
 	tabs[id] = {
-		badge: 0,
 		top: "",
-		frames: []
+		scriptsIndex: {},
+		scripts: []
 	};
 }
 
@@ -19,17 +19,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		let tab = tabs[tabID];
 	
 		switch(action){
-			case "add-badge": {
-				tab.badge += value;
-				if(tab.badge>0)
+			case "add-files": {
+				value.forEach(info => {
+					if(!tab.scriptsIndex[info.id]){
+						tab.scriptsIndex[info.id] = info;
+						tab.scripts.push(info);
+						if(info.enabled) tab.badge++;
+					}
+				});
+				
+				if(tab.scripts.length>0)
 					chrome.browserAction.setBadgeText({
 						tabId: tabID,
-						text: String(tab.badge)
+						text: String(tab.scripts.length)
 					});
-				break;
-			}
-			case "add-files": {
-				tab.frames.push(value);
 				break;
 			}
 			case "set-url": {
@@ -46,7 +49,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 		
 		switch(action){
 			case "get-files": {
-				sendResponse(tab.frames);
+				sendResponse(tab.scripts);
 				break;
 			}
 			case "get-url": {
