@@ -36,6 +36,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 				break;
 			}
 			case "set-url": {
+				createTab(tabID);
 				tab.top = value;
 				break;
 			}
@@ -58,10 +59,6 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 			}
 		}
 	}
-});
-chrome.tabs.onUpdated.addListener((tabID, changeInfo, tab) => {
-	if(changeInfo.status=="loading")
-		createTab(tabID);
 });
 chrome.tabs.onRemoved.addListener((tabID, removeInfo) => {
 	delete tabs[tabID];
