@@ -1,6 +1,6 @@
 let tabs = {};
 function createTab(id){
-	tabs[id] = {
+	return tabs[id] = {
 		top: "",
 		scriptsIndex: {},
 		scripts: []
@@ -43,7 +43,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 				break;
 			}
 			case "set-url": {
-				createTab(tabID);
+				tab = createTab(tabID);
 				tab.top = value;
 				break;
 			}
