@@ -25,6 +25,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 						tab.scriptsIndex[info.id] = info;
 						tab.scripts.push(info);
 						if(info.enabled) tab.badge++;
+						
+						let file = new File(info.id);
+						file.onChange = function(newInfo){
+							for(let index in newInfo){
+								info[index] = newInfo[index];
+							}
+						}
 					}
 				});
 				
