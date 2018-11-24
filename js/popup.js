@@ -3,6 +3,7 @@ let section = document.getElementById("files");
 let manage = document.getElementById("manage");
 manage.addEventListener("click", e => {
 	chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
+	window.close();
 });
 chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 	let tabID = tabs[0].id;
@@ -20,6 +21,7 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 			span.addEventListener("click", e => {
 				if(e.target.classList.contains("btn"))
 				chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+info.id)});
+				window.close();
 			});
 			
 			let enable = document.createElement("label");
@@ -72,6 +74,7 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 			f.changeInfo({type, name: "New "+(type=="CSS"?"Stylesheet":"Script"), links:[url]});
 			f.save().then(_ => {
 				chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+f.info.id)});
+				window.close();
 			});
 		}
 	});
