@@ -19,9 +19,10 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 			let span = document.createElement("span");
 			span.className = "line btn";
 			span.addEventListener("click", e => {
-				if(e.target.classList.contains("btn"))
-				chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+info.id)});
-				window.close();
+				if(e.target.classList.contains("btn")){
+					chrome.tabs.create({ url: chrome.runtime.getURL("editor.html#"+info.id)});
+					window.close();
+				}
 			});
 			
 			let enable = document.createElement("label");
