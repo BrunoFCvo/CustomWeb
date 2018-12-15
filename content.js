@@ -1,6 +1,11 @@
 let myHead = document.createElement("custom-web");
 document.documentElement.appendChild(myHead);
 
+chrome.runtime.sendMessage({
+	action: "set-url",
+	value: window.location.href
+});
+
 File.loadAll().then(files => {
 	let activeFiles = [];
 	for(let i = 0; i < files.length; i++){

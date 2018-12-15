@@ -59,11 +59,10 @@ chrome.tabs.query({active: true, currentWindow: true}, tabs => {
 	});
 	
 	// Query URL
+	addNew.style.display = "none";
 	chrome.runtime.sendMessage({tabID, action: "get-url"}, url => {
-		if(!url){
-			addNew.style.display = "none";
-			return;
-		}
+		if(!url) return;
+		addNew.style.display = "";
 		
 		let addJS = document.getElementById("add-js");
 		let addCSS = document.getElementById("add-css");
